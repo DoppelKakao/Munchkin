@@ -12,7 +12,7 @@ public class BoardController : MonoBehaviour
 
     void Update()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = GetRay();
         RaycastHit[] hits = Physics.RaycastAll(ray);
 
         foreach (var hit in hits)
@@ -25,4 +25,11 @@ public class BoardController : MonoBehaviour
             break;
         }
     }
+
+    public Ray GetRay()
+	{
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        return ray;
+	}
 }

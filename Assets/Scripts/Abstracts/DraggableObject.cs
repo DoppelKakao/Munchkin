@@ -25,6 +25,7 @@ public class DraggableObject : MonoBehaviour
 
         var speed = 10 * difference;
         _rigidbody.velocity = speed;
-        _rigidbody.rotation = Quaternion.Euler(new Vector3(speed.z * 0.3f, 0, -speed.x * 0.3f));
+        //TODO: cap the rotation of the card
+        _rigidbody.rotation = Quaternion.Euler(new Vector3(speed.z * 0.1f, 0, -speed.x * 0.1f));
     }
 }
