@@ -2,16 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class DraggableObject : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private float _startYPos;
     private BoardController _board;
+    //public GameObject board;
 
     void Start()
     {
         _board = GetComponentInParent<BoardController>();
+        //_board = board.GetComponent<BoardController>();
         _rigidbody = GetComponent<Rigidbody>();
 
         _startYPos = gameObject.transform.position.y;

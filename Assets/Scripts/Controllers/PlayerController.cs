@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class PlayerController : MonoBehaviour
+using Mirror;
+
+public class PlayerController : NetworkBehaviour
 {
     private PlayerInputAction playerInpputAction;
     private InputAction movement;
@@ -52,12 +54,12 @@ public class PlayerController : MonoBehaviour
     //track where the dragging action started
     Vector3 startDrag;
 
-	private void Awake()
-	{
+    private void Awake()
+    {
         mainCamera = Camera.main;
         playerInpputAction = new PlayerInputAction();
         cameraTransform = this.GetComponentInChildren<Camera>().transform;
-	}
+    }
 
 	private void OnEnable()
 	{
@@ -78,6 +80,8 @@ public class PlayerController : MonoBehaviour
 
 	private void Update()
 	{
+        if (!isLocalPlayer) return;
+
         GetKeyboardMovement();
 		if (useScreenEdge)
 		{

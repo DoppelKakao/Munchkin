@@ -1,9 +1,10 @@
 using UnityEngine;
+using Mirror;
 
-public class BoardController : MonoBehaviour
+public class BoardController : NetworkBehaviour
 {
     [HideInInspector] public Vector3 CurrentMousePosition;
-    private Camera mainCamera;
+    public Camera mainCamera;
 
     void Start()
     {
@@ -12,6 +13,11 @@ public class BoardController : MonoBehaviour
 
     void Update()
     {
+		if (mainCamera == null)
+		{
+            mainCamera = Camera.main;
+		}
+
         Ray ray = GetRay();
         RaycastHit[] hits = Physics.RaycastAll(ray);
 
