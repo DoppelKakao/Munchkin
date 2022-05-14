@@ -11,6 +11,7 @@ public class PlayerController : NetworkBehaviour
     private InputAction movement;
     private Transform cameraTransform;
     private Camera mainCamera;
+    private GameObject cameraMountPoint;
     //Only needed if I wanna use the ray out of the Controller
     //private BoardController boardController;
 
@@ -32,8 +33,12 @@ public class PlayerController : NetworkBehaviour
     private float minHeight = 5f;
     [SerializeField]
     private float maxHeight = 50f;
+    //[SerializeField]
+    //private float zoomSpeed = 2f;
+
+    //WASD movement
     [SerializeField]
-    private float zoomSpeed = 2f;
+    private bool useWASDMovement = true;
 
     //screen edge motion
     [SerializeField]
@@ -56,9 +61,20 @@ public class PlayerController : NetworkBehaviour
 
     private void Awake()
     {
-        mainCamera = Camera.main;
+        mainCamera = Camera.main;//(Camera) this.gameObject.transform.GetChild(0).GetComponent(typeof(Camera));
         playerInpputAction = new PlayerInputAction();
-        cameraTransform = this.GetComponentInChildren<Camera>().transform;
+        cameraTransform = mainCamera.transform;//this.GetComponentInChildren<Camera>().transform;
+    }
+
+	private void Start()
+	{
+        if (isLocalPlayer)
+        {
+            //cameraMountPoint = transform.GetChild(0).gameObject;
+            //cameraTransform.SetParent(transform.GetChild(0));
+            //cameraTransform.localPosition = transform.GetChild(0).transform.localPosition;
+            mainCamera.transform.GetComponent<CameraController>().AttachCameraToCameraMountPoint(transform.GetChild(0));
+        }
     }
 
 	private void OnEnable()
@@ -82,11 +98,16 @@ public class PlayerController : NetworkBehaviour
 	{
         if (!isLocalPlayer) return;
 
-        GetKeyboardMovement();
+		if (useWASDMovement)
+		{
+            GetKeyboardMovement();
+		}
+
 		if (useScreenEdge)
 		{
             CheckMouseAtScreenEdge();
 		}
+
         DragCamera();
 
         UpdateVelocity();
@@ -170,7 +191,7 @@ public class PlayerController : NetworkBehaviour
 
         cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, zoomTarget, Time.deltaTime * zoomDampening);
         cameraTransform.LookAt(this.transform);
-	}
+    }
 
     private void CheckMouseAtScreenEdge()
 	{
