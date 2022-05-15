@@ -61,18 +61,15 @@ public class PlayerController : NetworkBehaviour
 
     private void Awake()
     {
-        mainCamera = Camera.main;//(Camera) this.gameObject.transform.GetChild(0).GetComponent(typeof(Camera));
+        mainCamera = Camera.main;
         playerInpputAction = new PlayerInputAction();
-        cameraTransform = mainCamera.transform;//this.GetComponentInChildren<Camera>().transform;
+        cameraTransform = mainCamera.transform;
     }
 
 	private void Start()
 	{
         if (isLocalPlayer)
         {
-            //cameraMountPoint = transform.GetChild(0).gameObject;
-            //cameraTransform.SetParent(transform.GetChild(0));
-            //cameraTransform.localPosition = transform.GetChild(0).transform.localPosition;
             mainCamera.transform.GetComponent<CameraController>().AttachCameraToCameraMountPoint(transform.GetChild(0));
         }
     }

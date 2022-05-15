@@ -4,7 +4,7 @@ using Mirror;
 public class BoardController : NetworkBehaviour
 {
     [HideInInspector] public Vector3 CurrentMousePosition;
-    public Camera mainCamera;
+    private Camera mainCamera;
 
     void Start()
     {
