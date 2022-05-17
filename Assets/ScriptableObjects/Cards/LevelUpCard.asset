@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019679d04a5c9e74fa79fa1d1226e98d, type: 3}
+  m_Name: LevelUpCard
+  m_EditorClassIdentifier: 
+  name: Go Up A Level!
+  description: Go Up A Level!
+  background: {fileID: 21300000, guid: 8cd9569fdf374cf469863d3710f5017a, type: 3}
+  artwork: {fileID: 21300000, guid: 7e20f7ad0b399554a93a0705a484eac3, type: 3}
+  level: 1
