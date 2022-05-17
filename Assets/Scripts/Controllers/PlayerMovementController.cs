@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
 
-public class PlayerController : NetworkBehaviour
+public class PlayerMovementController : NetworkBehaviour
 {
     private PlayerInputAction playerInpputAction;
     private InputAction movement;
@@ -70,7 +70,7 @@ public class PlayerController : NetworkBehaviour
 	{
         if (isLocalPlayer)
         {
-            mainCamera.transform.GetComponent<CameraController>().AttachCameraToCameraMountPoint(transform.GetChild(0));
+            mainCamera.transform.GetComponent<PlayerCameraController>().AttachCameraToCameraMountPoint(transform.GetChild(0));
         }
     }
 

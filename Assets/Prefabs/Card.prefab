@@ -99,7 +99,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 0
-  m_AssetId: 
+  m_AssetId: bdece1f0c9f9160469d6ce0225d9e39b
   hasSpawned: 0
 --- !u!114 &1277793515425149391
 MonoBehaviour:
@@ -148,6 +148,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card: {fileID: 11400000, guid: 5706f17f0cb19c144b745b687240bd32, type: 2}
+  name: {fileID: 0}
+  description: {fileID: 0}
+  background: {fileID: 0}
+  artwork: {fileID: 0}
 --- !u!1 &1277793515651538009
 GameObject:
   m_ObjectHideFlags: 0
