@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 [System.Serializable]
 public class Player
@@ -10,7 +9,6 @@ public class Player
 	public int level;
 	public int strength;
 	public bool isPlaying;
-	//public Image TableTopArea;
 
 	public Player(int ID, int level, int strength, bool isPlaying)
 	{

@@ -1,34 +1,25 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-[System.Serializable]
 public class CardManager : MonoBehaviour
 {
-    public static CardManager instance;
-    public List<Card> cards = new List<Card>();
-	public Transform playerOneHand;
-	public Transform playerTwoHand;
-	public CardController cardControllerPrefab;
+    public LevelUpCard card;
 
-	private void Awake()
-	{
-		instance = this;
-	}
+    public TextMeshProUGUI name;
+    public TextMeshProUGUI description;
 
-	public void Start()
-	{
-		GenerateCards();
-	}
+    public Image background;
+    public Image artwork;
 
-	private void GenerateCards()
-	{
-		foreach (Card card in cards)
-		{
-			CardController newCard = Instantiate(cardControllerPrefab, playerOneHand);
-			newCard.transform.position = Vector3.zero;
-			newCard.Initialize(card);
-		}
-	}
+    // Start is called before the first frame update
+    void Start()
+    {
+        name.text = card.name;
+        description.text = card.description;
+        background.sprite = card.background;
+        artwork.sprite = card.artwork;
+    }
 }
