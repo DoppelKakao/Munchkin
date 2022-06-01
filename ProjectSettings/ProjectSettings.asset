@@ -145,13 +145,11 @@ PlayerSettings:
     enable360StereoCapture: 0
   isWsaHolographicRemotingEnabled: 0
   enableFrameTimingStats: 0
-  enableOpenGLProfilerGPURecorders: 1
   useHDRDisplay: 0
   D3DHDRBitDepth: 0
   m_ColorGamuts: 00000000
   targetPixelDensity: 30
   resolutionScalingMode: 0
-  resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
@@ -707,10 +705,10 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 2
-  cloudProjectId: 01b59d28-5311-46bf-bbd8-ee7a7bdb0a75
+  cloudProjectId: e64a32aa-14ed-4aee-8c8d-815b71a53795
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: new
+  projectName: Munchkin
   organizationId: pixelbre4ker
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
