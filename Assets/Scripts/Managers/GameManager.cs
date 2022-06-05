@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     public static GameManager _instance;
     public static GameManager Instance => _instance;
 
+    public GameState state;
+    public UnityAction<GameState> OnGameStateChange;
+
     private string _lobbyId;
 
     private RelayHostData _hostData;
@@ -27,7 +30,7 @@ public class GameManager : MonoBehaviour
     // Setup events
 
     // Notify state update
-    public UnityAction<string> UpdateState;
+    public UnityAction<string> UpdateLobbyState;
     // Notify Match found
     public UnityAction MatchFound;
 
@@ -45,6 +48,8 @@ public class GameManager : MonoBehaviour
 
     async void Start()
     {
+        UpdateGameState(GameState.Menu);
+
         // Initialize unity services
         await UnityServices.InitializeAsync();
 
@@ -66,7 +71,7 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Connected player with id: " + id);
 
-        UpdateState?.Invoke("Player found!");
+        UpdateLobbyState?.Invoke("Player found!");
         MatchFound?.Invoke();
     }
 
@@ -89,7 +94,7 @@ public class GameManager : MonoBehaviour
         };
 
         AuthenticationService.Instance.SignedOut += () => {
-            Debug.Log("Player signed out.");
+            Debug.Log($"Player { AuthenticationService.Instance.PlayerId } signed out.");
         };
     }
 
@@ -113,9 +118,11 @@ public class GameManager : MonoBehaviour
 
     public async void FindMatch()
     {
+        UpdateGameState(GameState.ConnectingToLobby);
+
         Debug.Log("Looking for a lobby...");
 
-        UpdateState?.Invoke("Looking for a match...");
+        UpdateLobbyState?.Invoke("Looking for a match...");
 
         try
         {
@@ -129,6 +136,8 @@ public class GameManager : MonoBehaviour
 
             Debug.Log("Joined lobby: " + lobby.Id);
             Debug.Log("Lobby Players: " + lobby.Players.Count);
+
+            UpdateGameState(GameState.InLobby);
 
             // Retrieve the Relay code previously set in the create match
             string joinCode = lobby.Data["joinCode"].Value;
@@ -162,7 +171,7 @@ public class GameManager : MonoBehaviour
             NetworkManager.Singleton.StartClient();
 
             // Trigger events
-            UpdateState?.Invoke("Match found!");
+            UpdateLobbyState?.Invoke("Match found!");
             MatchFound?.Invoke();
         }
         catch (LobbyServiceException e)
@@ -177,7 +186,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Creating a new lobby...");
 
-        UpdateState?.Invoke("Creating a new match...");
+        UpdateLobbyState?.Invoke("Creating a new match...");
 
         // External connections
         int maxConnections = 1;
@@ -222,6 +231,8 @@ public class GameManager : MonoBehaviour
 
             Debug.Log("Created lobby: " + lobby.Id);
 
+            UpdateGameState(GameState.InLobby);
+
             // Heartbeat the lobby every 15 seconds.
             StartCoroutine(HeartbeatLobbyCoroutine(lobby.Id, 15));
 
@@ -237,8 +248,9 @@ public class GameManager : MonoBehaviour
 
             // Finally start host
             NetworkManager.Singleton.StartHost();
+            UpdateGameState(GameState.InGame);
 
-            UpdateState?.Invoke("Waiting for players...");
+            UpdateLobbyState?.Invoke("Waiting for players...");
         }
         catch (LobbyServiceException e)
         {
@@ -266,11 +278,58 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    /// <summary>
-    /// RelayHostData represents the necessary informations
-    /// for a Host to host a game on a Relay
-    /// </summary>
-    public struct RelayHostData
+    #region GameState
+    public void UpdateGameState(GameState newState)
+	{
+        state = newState;
+
+		switch (state)
+		{
+			case GameState.Menu:
+				break;
+			case GameState.ConnectingToLobby:
+				break;
+			case GameState.InLobby:
+				break;
+			case GameState.ConnectingToGame:
+				break;
+			case GameState.StartGame:
+				break;
+			case GameState.InGame:
+				break;
+			case GameState.Combat:
+				break;
+			case GameState.CombatEnd:
+				break;
+			case GameState.RoundOver:
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+		}
+
+        OnGameStateChange?.Invoke(newState);
+	}
+
+	public enum GameState
+    {
+        Menu,
+        ConnectingToLobby,
+        InLobby,
+        ConnectingToGame,
+        StartGame,
+        InGame,
+        Combat,
+        CombatEnd,
+        RoundOver
+    }
+	#endregion
+
+	#region RelayData
+	/// <summary>
+	/// RelayHostData represents the necessary informations
+	/// for a Host to host a game on a Relay
+	/// </summary>
+	public struct RelayHostData
     {
         public string JoinCode;
         public string IPv4Address;
@@ -296,4 +355,5 @@ public class GameManager : MonoBehaviour
         public byte[] HostConnectionData;
         public byte[] Key;
     }
+	#endregion
 }

@@ -4,34 +4,52 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Netcode;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject playButton;
-    [SerializeField] private TextMeshProUGUI stateText;
+    [SerializeField] 
+    private GameObject menuItems;
+    [SerializeField]
+    private GameObject playerHUDItems;
+    [SerializeField]
+    private TextMeshProUGUI gameStateItem;
+
+    [SerializeField] 
+    private TextMeshProUGUI LobbyStateItem;
 
     private void Start()
     {
         // Subscribe to events
         GameManager.Instance.MatchFound += MatchFound;
-        GameManager.Instance.UpdateState += UpdateState;
+        GameManager.Instance.UpdateLobbyState += UpdateLobbyState;
+        GameManager.Instance.OnGameStateChange += UpdateGameState;
     }
 
-    private void UpdateState(string newState)
+    private void UpdateGameState(GameManager.GameState gameState)
+	{
+        gameStateItem.text = gameState.ToString();
+	}
+
+    private void UpdateLobbyState(string newState)
     {
-        stateText.text = newState;
+        LobbyStateItem.text = newState;
     }
 
     private void MatchFound()
     {
         // Disable LobbyUI
-        //playButton.SetActive(false);
+        menuItems.SetActive(false);
+        playerHUDItems.SetActive(true);
+        Camera.main.GetComponent<CameraController>().AttachCameraToCameraMountPoint(NetworkManager.Singleton.LocalClient.PlayerObject.transform.GetChild(0).GetChild(0).GetChild(0).transform);
+
     }
 
     private void OnDestroy()
     {
         // Unsubscribe from events
         GameManager.Instance.MatchFound -= MatchFound;
-        GameManager.Instance.UpdateState -= UpdateState;
+        GameManager.Instance.UpdateLobbyState -= UpdateLobbyState;
+        GameManager.Instance.OnGameStateChange -= UpdateGameState;
     }
 }

@@ -57,6 +57,7 @@ public class MenuController : MonoBehaviour
 	{
         CreateGameItems.SetActive(true);
 		BackOption.SetActive(true);
+
     }
 
 	private void enableJoinLobbyObjects()

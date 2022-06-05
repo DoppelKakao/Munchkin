@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Mirror;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -68,7 +68,7 @@ public class PlayerController : NetworkBehaviour
 
 	private void Start()
 	{
-        if (isLocalPlayer)
+        if (IsLocalPlayer)
         {
             mainCamera.transform.GetComponent<CameraController>().AttachCameraToCameraMountPoint(transform.GetChild(0));
         }
@@ -93,7 +93,7 @@ public class PlayerController : NetworkBehaviour
 
 	private void Update()
 	{
-        if (!isLocalPlayer) return;
+        if (!IsLocalPlayer) return;
 
 		if (useWASDMovement)
 		{

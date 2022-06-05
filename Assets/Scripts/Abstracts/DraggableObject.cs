@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
-using Mirror;
 
 public class DraggableObject : NetworkBehaviour
 {
@@ -22,7 +22,7 @@ public class DraggableObject : NetworkBehaviour
 
     private void OnMouseDrag()
     {
-		if (isLocalPlayer)
+		if (IsLocalPlayer)
 		{
             Vector3 newWorldPosition = new Vector3(_board.CurrentMousePosition.x, _startYPos + 1, _board.CurrentMousePosition.z);
 

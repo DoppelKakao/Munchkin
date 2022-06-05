@@ -1,7 +1,6 @@
 using UnityEngine;
-using Mirror;
 
-public class BoardController : NetworkBehaviour
+public class BoardController : MonoBehaviour
 {
     [HideInInspector] public Vector3 CurrentMousePosition;
     private Camera mainCamera;
