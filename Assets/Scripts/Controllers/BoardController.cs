@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class BoardController : MonoBehaviour
 {
-    [HideInInspector] public Vector3 CurrentMousePosition;
+    [HideInInspector] 
+    public Vector3 CurrentMousePosition;
+
     private Camera mainCamera;
 
     void Start()

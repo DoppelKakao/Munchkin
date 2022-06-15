@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : NetworkBehaviour
+public class PlayerController : MonoBehaviour
 {
     private PlayerInputAction playerInpputAction;
     private InputAction movement;
@@ -68,10 +68,10 @@ public class PlayerController : NetworkBehaviour
 
 	private void Start()
 	{
-        if (IsLocalPlayer)
-        {
+        //if (IsLocalPlayer)
+        //{
             mainCamera.transform.GetComponent<CameraController>().AttachCameraToCameraMountPoint(transform.GetChild(0));
-        }
+        //}
     }
 
 	private void OnEnable()
@@ -93,7 +93,7 @@ public class PlayerController : NetworkBehaviour
 
 	private void Update()
 	{
-        if (!IsLocalPlayer) return;
+        //if (!IsLocalPlayer) return;
 
 		if (useWASDMovement)
 		{

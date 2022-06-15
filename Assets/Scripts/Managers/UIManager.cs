@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
         // Disable LobbyUI
         menuItems.SetActive(false);
         playerHUDItems.SetActive(true);
+
+        //Das hier in GameManager, hat nichts mit UI zu tun
         Camera.main.GetComponent<CameraController>().AttachCameraToCameraMountPoint(NetworkManager.Singleton.LocalClient.PlayerObject.transform.GetChild(0).GetChild(0).GetChild(0).transform);
 
     }
