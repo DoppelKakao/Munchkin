@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.Netcode;
+using System.Linq;
 
 public class UIManager : MonoBehaviour
 {
@@ -38,13 +39,8 @@ public class UIManager : MonoBehaviour
 
     private void MatchFound()
     {
-        // Disable LobbyUI
-        menuItems.SetActive(false);
-        playerHUDItems.SetActive(true);
-
-        //Das hier in GameManager, hat nichts mit UI zu tun
-        Camera.main.GetComponent<CameraController>().AttachCameraToCameraMountPoint(NetworkManager.Singleton.LocalClient.PlayerObject.transform.GetChild(0).GetChild(0).GetChild(0).transform);
-
+        // To attach the camera to the camera mount point of the local PlayerPrefab
+        //Camera.main.GetComponent<CameraController>().AttachCameraToCameraMountPoint(NetworkManager.Singleton.LocalClient.PlayerObject.transform.GetChild(0).GetChild(0).GetChild(0).transform);
     }
 
     private void OnDestroy()

@@ -22,9 +22,27 @@ public class MenuController : MonoBehaviour
 	private GameObject LobbyItems;
 	[SerializeField]
 	private GameObject BackOption;
+	[SerializeField]
+	private TextMeshProUGUI JoinCode;
 
 	[SerializeField]
 	private GameObject PlayerContainer;
+	[SerializeField]
+	private GameObject PlayerOneContainer;
+	[SerializeField]   
+	private GameObject PlayerTwoContainer;
+	[SerializeField]   
+	private GameObject PlayerThreeContainer;
+	[SerializeField]   
+	private GameObject PlayerFourContainer;
+	[SerializeField]   
+	private GameObject PlayerFiveContainer;
+	[SerializeField]   
+	private GameObject PlayerSixContainer;
+	[SerializeField]   
+	private GameObject PlayerSevenContainer;
+	[SerializeField]   
+	private GameObject PlayerEightContainer;
 
 	private void Awake()
 	{
@@ -104,11 +122,21 @@ public class MenuController : MonoBehaviour
 	public void enableLobby()
 	{
 		LobbyItems.SetActive(true);
+
+		for (int i = 1; i < PlayerContainer.transform.childCount; i++)
+		{
+			PlayerContainer.transform.GetChild(i).gameObject.SetActive(false);
+		}
 	}
 
-	public void setLobbyPlayerData(int playerNumber, string id)
+	public void setLobbyPlayerData(int playerNumber, ulong id)
 	{
 		var playerLobbyProfile = PlayerContainer.transform.GetChild(playerNumber);
-		playerLobbyProfile.GetChild(1).GetComponent<TextMeshProUGUI>().text = id;
+		playerLobbyProfile.GetChild(1).GetComponent<TextMeshProUGUI>().text = id.ToString();
+	}
+
+	internal void setJoinCode(string value)
+	{
+		JoinCode.text = $"JoinCode: {value}";
 	}
 }

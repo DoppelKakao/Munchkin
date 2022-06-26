@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Transform cameraTransform;
     private Camera mainCamera;
     private GameObject cameraMountPoint;
-    //Only needed if I wanna use the ray out of the Controller
+    // Only needed if I wanna use the ray out of the Controller
     //private BoardController boardController;
 
     //horizontal motion
