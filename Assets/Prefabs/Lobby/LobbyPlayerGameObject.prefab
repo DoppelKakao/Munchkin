@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Number
+  m_text: -- 1 --
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 3834739551319247993}
   m_Layer: 5
   m_Name: PlayerNameText
-  m_TagString: Untagged
+  m_TagString: PlayerLobbyProfileName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 7535858114415449868}
   - component: {fileID: 8287865998580973808}
   - component: {fileID: 4203254411919038447}
-  - component: {fileID: 3583487609889982955}
+  - component: {fileID: 8507042688633155604}
   m_Layer: 0
   m_Name: LobbyPlayerGameObject
   m_TagString: Untagged
@@ -426,7 +426,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3583487609889982955
+--- !u!114 &8507042688633155604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -435,11 +435,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6127374040574586906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Script: {fileID: 11500000, guid: f764e5d5ea695704ca5c44652c6461b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  visible: 0
-  m_AssetId: 72addeab5aa8e154299edbe974349e00
-  hasSpawned: 0
+  playerContainer: {fileID: 6127374040574586906}
+  playerNameText: {fileID: 3834739551319247993}

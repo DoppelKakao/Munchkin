@@ -13,6 +13,7 @@ using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : NetworkBehaviour
 {
@@ -50,6 +51,8 @@ public class GameManager : NetworkBehaviour
     private TMP_InputField joinPlayerNameInputField;
     [SerializeField]
     private TMP_InputField createPlayerNameInputField;
+    [SerializeField]
+    private Button startGameButton;
 
     private void Awake()
     {
@@ -77,22 +80,22 @@ public class GameManager : NetworkBehaviour
         await SignInAnonymouslyAsync();
 
         // Subscribe to NetworkManager events
-        NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
+        //NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
     }
 
     #region Network events
 
-    private void ClientConnected(ulong id)
-    {
-        // Player with id connected to our session
+    //private void ClientConnected(ulong id)
+    //{
+    //    // Player with id connected to our session
 
-        Debug.Log("Connected player with id: " + id);
+    //    Debug.Log("Connected player with id: " + id);
 
-        UpdateLobbyState?.Invoke("Player found!");
+    //    UpdateLobbyState?.Invoke("Player found!");
 
-        MenuController.instance.setLobbyPlayerData(lobby.Players.Count, id);
-        //MatchFound?.Invoke();
-    }
+    //    MenuController.instance.setLobbyPlayerData(lobby.Players.Count, id);
+    //    //MatchFound?.Invoke();
+    //}
 
     #endregion
 
@@ -256,7 +259,7 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float waitTimeSeconds)
+	IEnumerator HeartbeatLobbyCoroutine(string lobbyId, float waitTimeSeconds)
     {
         var delay = new WaitForSecondsRealtime(waitTimeSeconds);
         while (true)
